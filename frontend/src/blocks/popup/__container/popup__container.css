@@ -1,0 +1,11 @@
+.popup__container {
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  align-self: center;
+  min-width: 420px;
+  background-color: white;
+  border-radius: 10px;
+  z-index: 2;
+  height: max-content;
+}

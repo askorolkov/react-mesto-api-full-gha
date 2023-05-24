@@ -1,0 +1,13 @@
+.popup__field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup__field:first-of-type {
+  padding-top: 16px;
+}
+
+.popup__field:last-of-type {
+  padding-bottom: 18px;
+}

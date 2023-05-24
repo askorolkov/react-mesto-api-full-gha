@@ -1,0 +1,10 @@
+.auth__wrapper {
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  width: 358px;
+  border-radius: 10px;
+  height: max-content;
+  flex: 1;
+}
