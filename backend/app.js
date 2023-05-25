@@ -12,9 +12,9 @@ const { onUserCreateValidation, onUserLoginValidation } = require('./middlewares
 const { login, createUser } = require('./controllers/users');
 
 const { PORT = 3000 } = process.env;
-app.use(cors());
-const app = express();
 
+const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 
 app.post('/signin', onUserLoginValidation, login);
