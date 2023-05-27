@@ -17,17 +17,17 @@ function Card(props) {
   const currentUser = React.useContext(CurrentUserContext);
   const isOwn = props.card.owner._id === currentUser.userId;
   const isLiked = props.card.likes.some(i => i._id === currentUser.userId);
-  const cardLikeButtonClassName = ( 
-    `card__like ${isLiked && 'card__like_active'}` 
+  const cardLikeButtonClassName = (
+    `card__like ${isLiked && 'card__like_active'}`
   );
 
   return (
     <div className="card" >
       {isOwn && <button aria-label="Удалить" type="button" className="card__delete" onClick={handleDeleteClick}></button>}
-      <img className="card__photo" alt={props.card.name} src={props.card.link} onClick={handleCardClick}/>      
+      <img className="card__photo" alt={props.card.name} src={props.card.link} onClick={handleCardClick}/>
       <div className="card__description">
         <h2 className="card__location">{props.card.name}</h2>
-        <div className="card__counter">          
+        <div className="card__counter">
           <button
             aria-label="Поставить лайк"
             type="button"

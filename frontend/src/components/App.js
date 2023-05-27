@@ -85,7 +85,7 @@ function App() {
     .then((res)=>{
       if(res) {
         handleSignIn();
-        setUserEmail(res.data.email);
+        setUserEmail(res.email);
         navigate('/');
       }
     })
@@ -199,7 +199,7 @@ function App() {
     .then((res)=> {
       setIsRegisterSuccess(true);
       openInfoPopup();
-      navigate('/signin');
+      navigate('/sign-in');
     })
     .catch((err) => {
       setIsRegisterSuccess(false);
@@ -225,7 +225,7 @@ function App() {
   function handleSignOut() {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
-    navigate('/signin');
+    navigate('/sign-in');
   }
 
   return (
@@ -234,8 +234,8 @@ function App() {
     <div className="page__container">
       <Header email={userEmail} onClick={handleSignOut}/>
       <Routes>
-        <Route path='/signin' element={<Login onLogin={handleLogin}/>} />
-        <Route path='/signup' element={<Register onRegister={handleRegister} />} />
+        <Route path='/sign-in' element={<Login onLogin={handleLogin}/>} />
+        <Route path='/sign-up' element={<Register onRegister={handleRegister} />} />
         <Route path='/' element={<ProtectedRoute element={Main}
             onEditProfile={openProfilePopup}
             onAddPhoto={openPlacePopup}

@@ -2,8 +2,7 @@ import { apiOptions } from './constants.js';
 
 class Api {
   constructor(options) {
-    this._token = options.token;
-    this._group = options.groupId;
+    this.baseUrl = options.baseUrl;
   }
 
   //проверяем ответ сервера и возвращаем результат запроса
@@ -15,28 +14,31 @@ class Api {
   }
 
   getUserInfo() {
-    return fetch("https://nomoreparties.co/v1/cohort-60/users/me", {
+    const token = localStorage.getItem('jwt');
+    return fetch(`${this.baseUrl}/users/me`, {
       headers: {
-        authorization: "0a98da9d-1ce8-48ff-96dd-ceb4a933f9be",
+        authorization: token,
       },
     }).then((res) => this._checkResponse(res));
   }
 
   getInitialCards() {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._group}/cards`, {
+    const token = localStorage.getItem('jwt');
+    return fetch(`${this.baseUrl}/cards`, {
       headers: {
-        authorization: this._token,
+        authorization: token,
       },
     }).then((res) => this._checkResponse(res));
   }
 
   changeAvatar(avatarLink) {
+    const token = localStorage.getItem('jwt');
     return fetch(
-      `https://mesto.nomoreparties.co/v1/${this._group}/users/me/avatar`,
+      `${this.baseUrl}/users/me/avatar`,
       {
         method: "PATCH",
         headers: {
-          authorization: this._token,
+          authorization: token,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -47,10 +49,11 @@ class Api {
   }
 
   changeUserInfo(info) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._group}/users/me`, {
+    const token = localStorage.getItem('jwt');
+    return fetch(`${this.baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
-        authorization: this._token,
+        authorization: token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -61,10 +64,11 @@ class Api {
   }
 
   addNewCard(placeName, placeLink) {
-    return fetch(`https://mesto.nomoreparties.co/v1/${this._group}/cards`, {
+    const token = localStorage.getItem('jwt');
+    return fetch(`${this.baseUrl}/cards`, {
       method: "POST",
       headers: {
-        authorization: this._token,
+        authorization: token,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -75,62 +79,38 @@ class Api {
   }
 
   deleteCard(card_id) {
+    const token = localStorage.getItem('jwt');
     return fetch(
-      `https://mesto.nomoreparties.co/v1/${this._group}/cards/${card_id}`,
+      `${this.baseUrl}/cards/${card_id}`,
       {
         method: "DELETE",
         headers: {
-          authorization: this._token,
+          authorization: token,
         },
       }
     )
     .then((res) => this._checkResponse(res));
   }
 
-  // putLike(card_id) {
-  //   console.log('вызвал лайк')
-  //   return fetch(
-  //     `https://mesto.nomoreparties.co/v1/${this._group}/cards/${card_id}/likes`,
-  //     {
-  //       method: "PUT",
-  //       headers: {
-  //         authorization: this._token,
-  //       },
-  //     }
-  //   ).then((res) => this._checkResponse(res));
-  // }
-
-  // deleteLike(card_id) {
-  //   console.log('вызвал делит')
-  //   return fetch(
-  //     `https://mesto.nomoreparties.co/v1/${this._group}/cards/${card_id}/likes`,
-  //     {
-  //       method: "DELETE",
-  //       headers: {
-  //         authorization: this._token,
-  //       },
-  //     }
-  //   ).then((resp) => this._checkResponse(resp));
-  // }
-
   changeLikeCardStatus(id, likeStatus) {
-    if (likeStatus) {      
+    const token = localStorage.getItem('jwt');
+    if (likeStatus) {
       return fetch(
-        `https://mesto.nomoreparties.co/v1/${this._group}/cards/${id}/likes`,
+        `${this.baseUrl}/cards/${id}/likes`,
         {
           method: "DELETE",
           headers: {
-            authorization: this._token,
+            authorization: token,
           },
         }
       ).then((resp) => this._checkResponse(resp));
-    } else {      
+    } else {
       return fetch(
-        `https://mesto.nomoreparties.co/v1/${this._group}/cards/${id}/likes`,
+        `${this.baseUrl}/cards/${id}/likes`,
         {
          method: "PUT",
           headers: {
-            authorization: this._token,
+            authorization: token,
          },
         }
       ).then((res) => this._checkResponse(res));

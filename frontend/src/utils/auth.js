@@ -1,8 +1,10 @@
+import { apiOptions } from './constants.js';
+
 export class Auth {
-  constructor(baseUrl) {
-    this._baseUrl = baseUrl;
+  constructor(options) {
+    this._baseUrl = options.baseUrl;
   }
-  
+
   _checkResponse(resp) {
     if (resp.ok) {
       return resp.json();
@@ -28,7 +30,8 @@ export class Auth {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
-    }).then((res) => this._checkResponse(res));
+    })
+    .then((res) => this._checkResponse(res))
   }
 
   // проверяем токен
@@ -37,13 +40,11 @@ export class Auth {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${token}`,
       },
     }).then((res) => this._checkResponse(res));
   }
 
-  
-
 }
 
-export const auth = new Auth("https://auth.nomoreparties.co");
+export const auth = new Auth(apiOptions);
