@@ -8,9 +8,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes');
 
 const auth = require('./middlewares/auth');
-
 const { onUserCreateValidation, onUserLoginValidation } = require('./middlewares/validation');
-
 const { login, createUser } = require('./controllers/users');
 
 const { PORT = 3000 } = process.env;
