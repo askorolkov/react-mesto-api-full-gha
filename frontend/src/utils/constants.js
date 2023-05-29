@@ -1,3 +1,3 @@
 export const apiOptions = {
-  baseUrl: "api.askorolkov.nomoredomains.rocks",
+  baseUrl: "https://api.askorolkov.nomoredomains.rocks",
 };
