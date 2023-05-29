@@ -1,8 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const cors = require('cors');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes');
 
 const auth = require('./middlewares/auth');
@@ -16,12 +18,12 @@ const { PORT = 3000 } = process.env;
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-
+app.use(requestLogger);
 app.post('/signin', onUserLoginValidation, login);
 app.post('/signup', onUserCreateValidation, createUser);
 app.use(auth);
 app.use(router);
-
+app.use(errorLogger);
 app.use(errors());
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
