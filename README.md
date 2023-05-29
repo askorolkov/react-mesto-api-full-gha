@@ -7,7 +7,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.101.215
+IP 158.160.101.215
 
 Frontend http://askorolkov.nomoredomains.rocks
 
