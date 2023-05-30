@@ -17,6 +17,7 @@ class Api {
     const token = localStorage.getItem('jwt');
     return fetch(`${this.baseUrl}/users/me`, {
       headers: {
+        "Content-Type": "application/json",
         authorization: token,
       },
     }).then((res) => this._checkResponse(res));
@@ -26,6 +27,7 @@ class Api {
     const token = localStorage.getItem('jwt');
     return fetch(`${this.baseUrl}/cards`, {
       headers: {
+        "Content-Type": "application/json",
         authorization: token,
       },
     }).then((res) => this._checkResponse(res));
