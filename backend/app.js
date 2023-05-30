@@ -15,6 +15,8 @@ const { PORT = 3000 } = process.env;
 const allowedCors = [
   'https://askorolkov.nomoredomains.rocks',
   'http://askorolkov.nomoredomains.rocks',
+  'https://api.askorolkov.nomoredomains.rocks',
+  'http://api.askorolkov.nomoredomains.rocks',
 ];
 
 const app = express();
