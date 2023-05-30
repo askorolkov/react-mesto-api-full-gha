@@ -12,32 +12,11 @@ const { onUserCreateValidation, onUserLoginValidation } = require('./middlewares
 const { login, createUser } = require('./controllers/users');
 
 const { PORT = 3000 } = process.env;
-const allowedCors = [
-  'https://askorolkov.nomoredomains.rocks',
-  'http://askorolkov.nomoredomains.rocks',
-  'https://api.askorolkov.nomoredomains.rocks',
-  'http://api.askorolkov.nomoredomains.rocks',
-];
 
 const app = express();
-app.use(cors());
-app.use((req, res, next) => {
-  const { method } = req;
-  const { origin } = req.headers;
-  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
-  const requestHeaders = req.headers['access-control-request-headers'];
-  if (method === 'OPTIONS') {
-    res.header('Access-Control-Allow-Headers', requestHeaders);
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    return res.end();
-  }
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Credentials', 'true');
-  }
 
-  return next();
-});
+app.use(cors());
+
 app.use(bodyParser.json());
 app.use(requestLogger);
 app.post('/signin', onUserLoginValidation, login);
