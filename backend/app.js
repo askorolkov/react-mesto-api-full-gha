@@ -21,14 +21,14 @@ const allowedCors = {
 };
 const app = express();
 app.use(cors(allowedCors));
-// app.use((req, res, next) => {
-//   const { origin } = req.headers;
-//   if (allowedCors.includes(origin)) {
-//     res.header('Access-Control-Allow-Origin', origin);
-//   }
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
 
-//   next();
-// });
+  next();
+});
 app.use(bodyParser.json());
 app.use(requestLogger);
 app.post('/signin', onUserLoginValidation, login);
