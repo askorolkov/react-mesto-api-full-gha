@@ -12,34 +12,26 @@ const { onUserCreateValidation, onUserLoginValidation } = require('./middlewares
 const { login, createUser } = require('./controllers/users');
 
 const { PORT = 3000 } = process.env;
-const allowedCors = {
-  origin: [
-    'https://askorolkov.nomoredomains.rocks',
-    'http://askorolkov.nomoredomains.rocks',
-  ],
-  credentials: true,
-  optionsSuccessStatus: 200,
-};
+const allowedCors = [
+  'https://askorolkov.nomoredomains.rocks',
+  'http://askorolkov.nomoredomains.rocks',
+];
 
 const app = express();
-app.use(cors(allowedCors));
+// app.use(cors(allowedCors));
 app.use((req, res, next) => {
   const { method } = req;
   const { origin } = req.headers;
-  console.log(origin);
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   const requestHeaders = req.headers['access-control-request-headers'];
   if (method === 'OPTIONS') {
-    // разрешаем кросс-доменные запросы любых типов (по умолчанию)
-    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    // разрешаем кросс-доменные запросы с этими заголовками
     res.header('Access-Control-Allow-Headers', requestHeaders);
-    // завершаем обработку запроса и возвращаем результат клиенту
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
     return res.end();
   }
   if (allowedCors.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
-    console.log('includes');
+    res.header('Access-Control-Allow-Credentials', 'true');
   }
 
   return next();
