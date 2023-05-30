@@ -12,10 +12,14 @@ const { onUserCreateValidation, onUserLoginValidation } = require('./middlewares
 const { login, createUser } = require('./controllers/users');
 
 const { PORT = 3000 } = process.env;
-const allowedCors = [
-  'https://askorolkov.nomoredomains.rocks',
-  'http://askorolkov.nomoredomains.rocks',
-];
+const allowedCors = {
+  origin: [
+    'https://askorolkov.nomoredomains.rocks',
+    'http://askorolkov.nomoredomains.rocks',
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
 
 const app = express();
 app.use(cors(allowedCors));
