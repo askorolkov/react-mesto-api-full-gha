@@ -24,12 +24,12 @@ const corsOptions = {
   ],
 };
 const app = express();
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.use(requestLogger);
-app.post('/signin', onUserLoginValidation, login);
-app.post('/signup', onUserCreateValidation, createUser);
+app.post('/signin', cors(), login);
+app.post('/signup', cors(), createUser);
 app.use(auth);
 app.use(router);
 app.use(errorLogger);
