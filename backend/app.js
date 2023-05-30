@@ -14,8 +14,8 @@ const { login, createUser } = require('./controllers/users');
 const { PORT = 3000 } = process.env;
 const allowedCors = {
   origin: [
-    'https://askorolkov.nomoredomains.rocks/sign-in',
-    'http://askorolkov.nomoredomains.rocks/sign-in',
+    'https://askorolkov.nomoredomains.rocks',
+    'http://askorolkov.nomoredomains.rocks',
   ],
   optionsSuccessStatus: 200,
 };
