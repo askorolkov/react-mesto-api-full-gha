@@ -16,6 +16,7 @@ class Api {
   getUserInfo() {
     const token = localStorage.getItem('jwt');
     return fetch(`${this.baseUrl}/users/me`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         authorization: token,
@@ -26,6 +27,7 @@ class Api {
   getInitialCards() {
     const token = localStorage.getItem('jwt');
     return fetch(`${this.baseUrl}/cards`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         authorization: token,

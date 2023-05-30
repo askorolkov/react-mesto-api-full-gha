@@ -16,6 +16,7 @@ export class Auth {
     return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
       headers: {
+        'Accept': 'application/json',
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
@@ -27,6 +28,7 @@ export class Auth {
     return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
       headers: {
+        'Accept': 'application/json',
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email, password }),
@@ -39,6 +41,7 @@ export class Auth {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: {
+        'Accept': 'application/json',
         "Content-Type": "application/json",
         authorization: `Bearer ${token}`,
       },
