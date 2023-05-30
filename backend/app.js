@@ -20,7 +20,7 @@ const allowedCors = [
 ];
 
 const app = express();
-// app.use(cors(allowedCors));
+app.use(cors());
 app.use((req, res, next) => {
   const { method } = req;
   const { origin } = req.headers;
