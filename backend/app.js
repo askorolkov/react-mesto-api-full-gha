@@ -12,9 +12,19 @@ const { onUserCreateValidation, onUserLoginValidation } = require('./middlewares
 const { login, createUser } = require('./controllers/users');
 
 const { PORT = 3000 } = process.env;
-
+const corsOptions = {
+  credentials: true,
+  origin: [
+    'http://localhost:3000',
+    'https://localhost:3000',
+    'https://askorolkov.nomoredomains.rocks',
+    'http://askorolkov.nomoredomains.rocks',
+    'https://api.askorolkov.nomoredomains.rocks',
+    'https://api.askorolkov.nomoredomains.rocks',
+  ],
+};
 const app = express();
-app.options('*', cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.use(requestLogger);
