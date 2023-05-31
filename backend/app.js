@@ -6,23 +6,13 @@ const { errors } = require('celebrate');
 const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes');
-
+const corsOptions = require('./utils/corsOptions');
 const auth = require('./middlewares/auth');
 const { onUserCreateValidation, onUserLoginValidation } = require('./middlewares/validation');
 const { login, createUser } = require('./controllers/users');
 
 const { PORT = 3000 } = process.env;
-const corsOptions = {
-  credentials: true,
-  origin: [
-    'http://localhost:3000',
-    'https://localhost:3000',
-    'https://askorolkov.nomoredomains.rocks',
-    'http://askorolkov.nomoredomains.rocks',
-    'https://api.askorolkov.nomoredomains.rocks',
-    'https://api.askorolkov.nomoredomains.rocks',
-  ],
-};
+
 const app = express();
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
