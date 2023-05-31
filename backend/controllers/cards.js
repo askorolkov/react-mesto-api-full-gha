@@ -4,7 +4,7 @@ const BadRequestError = require('../errors/BadRequest');
 const ForbiddenError = require('../errors/ForbiddenError');
 
 const getCards = (req, res, next) => {
-  Card.find({}).populate(['owner', 'likes'])
+  Card.find({})
     .then((cards) => res.send(cards))
     .catch(next);
 };
@@ -50,7 +50,7 @@ const putLike = (req, res, next) => {
     req.params.cardId,
     { $addToSet: { likes: req.user._id } },
     { new: true },
-  ).populate(['owner', 'likes'])
+  )
     .then((card) => {
       if (!card) {
         throw new NotFoundError('Карточка с таким ID не найдена');
