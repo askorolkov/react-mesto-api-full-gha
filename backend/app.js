@@ -7,9 +7,6 @@ const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes');
 const corsOptions = require('./utils/corsOptions');
-const auth = require('./middlewares/auth');
-const { onUserCreateValidation, onUserLoginValidation } = require('./middlewares/validation');
-const { login, createUser } = require('./controllers/users');
 
 const { PORT = 3000 } = process.env;
 
@@ -18,9 +15,7 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 app.use(requestLogger);
-app.post('/signin', onUserLoginValidation, login);
-app.post('/signup', onUserCreateValidation, createUser);
-app.use(auth);
+
 app.use(router);
 app.use(errorLogger);
 app.use(errors());
