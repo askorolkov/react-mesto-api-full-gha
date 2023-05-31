@@ -219,6 +219,7 @@ function App() {
     })
     .catch((err) => {
       console.log(err)
+      setIsRegisterSuccess(false);
       openInfoPopup();
     })
   }
