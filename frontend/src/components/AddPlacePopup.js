@@ -8,14 +8,16 @@ function AddPlacePopup(props) {
 
   function handleSubmit(e) {
     e.preventDefault()
-    
-    props.onAddPlace(placeNameRef.current.value, placeLinkRef.current.value)
+
+    props.onAddPlace(placeNameRef.current.value, placeLinkRef.current.value);
+    placeNameRef.current.value = '';
+    placeLinkRef.current.value = '';
   }
 
   function handleClose() {
     props.onClose();
     placeNameRef.current.value = '';
-    placeLinkRef.current.value = '';    
+    placeLinkRef.current.value = '';
   }
 
   return (

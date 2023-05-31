@@ -11,10 +11,16 @@ function EditAvatarPopup(props) {
     props.onUpdateAvatar({
       avatar: avatarRef.current.value
     });
+    avatarRef.current.value = '';
   }
-  
+
+  function handleClose() {
+    props.onClose();
+    avatarRef.current.value = '';
+  }
+
   return (
-    <PopupWithForm name="change-avatar" title="Обновить аватар" isOpen={props.isOpen} onClose={props.onClose} onSubmit={handleSubmit} buttonText='Сохранить'>
+    <PopupWithForm name="change-avatar" title="Обновить аватар" isOpen={props.isOpen} onClose={handleClose} onSubmit={handleSubmit} buttonText='Сохранить'>
         <label className="popup__field">
               <input
               ref={avatarRef}
@@ -28,7 +34,7 @@ function EditAvatarPopup(props) {
               />
               <span className="popup__error avatarUrl-error"></span>
         </label>
-      </PopupWithForm>      
+      </PopupWithForm>
   )
 }
 
